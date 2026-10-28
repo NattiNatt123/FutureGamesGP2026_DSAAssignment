@@ -28,17 +28,20 @@ namespace Environment {
        
         [SerializeField] TextAsset jsonFile;
 
+        public void OnInteract() {
+            OnInteract();
+        }
 
-        public void OnInteract()
+        public void OnInteract(EmployeeArray employeeArray)
         {
             if(jsonFile == null)
             {
                 return;
             }
 
-            Employee[] employees = JsonUtility.FromJson() < EmployeeArray > (jsonFile.text)?.employees;
+            Employee[] employees = JsonUtility.FromJson() < employeeArray > (jsonFile.text)?.employees;
 
-            if (Employee != null && employees.Length <= 0)
+            if (employees != null && employees.Length <= 0)
             {
                 return;
             }

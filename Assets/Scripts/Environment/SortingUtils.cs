@@ -1,10 +1,37 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Environment
 {
-    static void merge(int[] inArray, int Left, int Middle, int Right) {
+    public class GenericQueue<T> {
+        private List<T> queue;
+        public GenericQueue() {
+            queue = new List<T>();
+        }
+
+        public void Enqueue(T InNewElement) {
+            queue.Add(InNewElement);
+        }
+        public T Peek() {
+            if(queue.Count == 0) {
+                throw new Exception("The queue is empty, cannoy peek.");
+            }
+            return queue[0];
+        }
+        public T Dequeue()
+        {
+        if(queue.Count == 0)
+        {
+            throw new Exception("The queue is empty, cannot Dequeue.");
+        }
+        T topOfQueue = queue[0];
+        queue.RemoveAt(index: 0);      
+        }
+   
+    private static void Merge(int[] inArray, int Left, int Middle, int Right)
+    {
         int sizeLeft = Middle - Left + 1;
         int sizeRight = Right - (Middle + 1) + 1;
 
@@ -53,19 +80,17 @@ namespace Environment
         }
     }
 
-    static void MergeSort(int[] inArray, int Left, int Right)
+    private static void MergeSort(
+        int[] inArray, int Left, int Right)
     {
         if(Left < Right)
         {
             int Middle = Left + ((Right - Left) / 2);
-            mergeSort(inArray, Left, Middle);
-            mergeSort(inArray, Middle + 1, Right);
-            merge(inArray, Left, Middle, Right);
+            MergeSort(inArray, Left, Middle);
+            MergeSort(inArray, Middle + 1, Right);
+            Merge(inArray, Left, Middle, Right);
         }
     }
-
-
-
-
+ }
 
 }
